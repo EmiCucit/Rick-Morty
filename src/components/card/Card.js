@@ -3,14 +3,12 @@ import styles from './card.module.css'
 import FontAwesome from 'react-fontawesome'
 import PropTypes from 'prop-types'
 
-let rick = "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
-
 function onClick(side) {
     return () => console.log(side)
 }
 
 export default function Card({
-    name, image, rightClick, leftClick
+    name, image, rightClick, leftClick, hide
 }) {
     return (
         <div className={styles.container}>
@@ -19,7 +17,7 @@ export default function Card({
                 <p className={styles.name}>
                     {name}
                 </p>
-                <div className={styles.actions}>
+                {!hide &&<div className={styles.actions}>
                     <div
                         onClick={leftClick || onClick("left")}
                         className={styles.left}>
@@ -36,7 +34,7 @@ export default function Card({
                             size="2x"
                         />
                     </div>
-                </div>
+                </div>}
             </div>
         </div>
     )
@@ -49,7 +47,3 @@ Card.propTypes = {
     rightClick: PropTypes.func,
 }
 
-Card.defaultProps = {
-    name: "Rick Sanches",
-    image: rick,
-}
